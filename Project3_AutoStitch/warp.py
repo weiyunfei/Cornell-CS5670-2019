@@ -18,7 +18,7 @@ def warpLocal(src, uv):
     '''
     width = src.shape[1]
     height  = src.shape[0]
-    mask = cv2.inRange(uv[:,:,1],0,height-1)&cv2.inRange(uv[:,:,0],0,width-1)
+    mask = cv2.inRange(uv[:,:,1],0,height-1.0)&cv2.inRange(uv[:,:,0],0,width-1.0)
     warped = cv2.remap(src, uv[:, :, 0].astype(np.float32),\
              uv[:, :, 1].astype(np.float32), cv2.INTER_LINEAR, borderMode=cv2.BORDER_REPLICATE)
     img2_fg = cv2.bitwise_and(warped,warped,mask = mask)
