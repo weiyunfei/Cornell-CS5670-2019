@@ -19,8 +19,6 @@ class GifWriter(object):
         imageio.imwrite(filename, image)
 
     def close(self):
-        # subprocess.check_call(['convert', '-delay', '2', '-loop', '0'] +
-        #                       self.temp_filenames + [self.dest_gif])
         frames = []
         for filename in self.temp_filenames:
         	frames.append(imageio.imread(filename))
