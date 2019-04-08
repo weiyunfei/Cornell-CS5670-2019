@@ -1,20 +1,11 @@
 import subprocess
 import os
-
-from scipy.misc import imsave
+import imageio
 
 
 class GifWriter(object):
 
     def __init__(self, temp_format, dest_gif):
-        try:
-            subprocess.check_call(
-                ['convert'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        except OSError:
-            raise Exception('imagemagick is required for gif support')
-        except subprocess.CalledProcessError:
-            pass
-
         self.temp_format = temp_format
         self.dest_gif = dest_gif
         self.temp_filenames = []
@@ -25,11 +16,16 @@ class GifWriter(object):
             raise Exception('GifWriter is already closed')
         filename = self.temp_format % len(self.temp_filenames)
         self.temp_filenames.append(filename)
-        imsave(filename, image)
+        imageio.imwrite(filename, image)
 
     def close(self):
-        subprocess.check_call(['convert', '-delay', '2', '-loop', '0'] +
-                              self.temp_filenames + [self.dest_gif])
+        # subprocess.check_call(['convert', '-delay', '2', '-loop', '0'] +
+        #                       self.temp_filenames + [self.dest_gif])
+        frames = []
+        for filename in self.temp_filenames:
+        	frames.append(imageio.imread(filename))
+
+        imageio.mimwrite(self.dest_gif, frames, format='GIF', duration=2.0/100.0, loop=0.0)
         for filename in self.temp_filenames:
             os.unlink(filename)
         self.closed = True
