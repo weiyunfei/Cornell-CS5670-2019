@@ -1,12 +1,9 @@
-# Please place imports here.
-# BEGIN IMPORTS
 import time
 from math import floor
 import numpy as np
 import cv2
 from scipy.sparse import csr_matrix
-# import util_sweep
-# END IMPORTS
+import util_sweep
 
 
 def compute_photometric_stereo_impl(lights, images):
@@ -35,8 +32,6 @@ def compute_photometric_stereo_impl(lights, images):
     raise NotImplementedError()
 
 
-
-
 def project_impl(K, Rt, points):
     """
     Project 3D points into a calibrated camera.
@@ -48,7 +43,6 @@ def project_impl(K, Rt, points):
         projections -- height x width x 2 array of 2D projections
     """
     raise NotImplementedError()
-
 
 
 def preprocess_ncc_impl(image, ncc_size):
@@ -96,7 +90,7 @@ def preprocess_ncc_impl(image, ncc_size):
 
     Input:
         image -- height x width x channels image of type float32
-        ncc_size -- integer width and height of NCC patch region.
+        ncc_size -- integer width and height of NCC patch region; assumed to be odd
     Output:
         normalized -- heigth x width x (channels * ncc_size**2) array
     """
