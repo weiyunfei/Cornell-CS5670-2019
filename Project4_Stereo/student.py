@@ -90,7 +90,7 @@ def preprocess_ncc_impl(image, ncc_size):
     +------+------+  +------+------+  v
     width ------->
 
-    v = [ x111, x121, x211, x112, x112, x122, x212, x222 ]
+    v = [ x111, x121, x211, x221, x112, x122, x212, x222 ]
 
     see order argument in np.reshape
 
