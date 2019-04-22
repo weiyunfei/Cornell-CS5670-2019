@@ -24,8 +24,8 @@ def compute_photometric_stereo_impl(lights, images):
                   same viewpoint, but under the lighting condition specified in
                   lights.
     Output:
-        albedo -- float32 height x width x 3 image with dimensions matching the
-                  input images.
+        albedo -- float32 image. When the input 'images' are RGB, it should be of dimension height x width x 3,
+                  while in the case of grayscale 'images', the dimension should be height x width x 1.
         normals -- float32 height x width x 3 image with dimensions matching
                    the input images.
     """
